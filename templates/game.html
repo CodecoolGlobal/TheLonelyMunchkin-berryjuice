@@ -3,8 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <title>TheLonelyMunchkin</title>
+    <link rel="stylesheet" href="/static/css/cards.css">
+    <script src="/static/js/game.js" defer></script>
 </head>
-<body>
-sdfsdlkfjélskdfjklasjdlékfjskla
+<div class="card" id="level">
+    <h4>Level</h4>
+    <p>1</p>
+</div>
+<div class="card" id="combat-strength">
+    <h4>Combat strength</h4>
+    <h4>1</h4>
+</div>
+<div class="card" id="gender">
+    <h4>Gender</h4>
+    <p><img src="/static/images/{{ gender }}.png" width="15px"></p>
+</div>
+<div class="card" id="race">
+    <h4>Race</h4>
+    <p>human</p>
+</div>
+<div class="card" id="class">
+    <h4>Class</h4>
+    <p>bumpkin</p>
+</div>
+<div class="plain-card" id="dg-back">
+    <img src="/static/images/dungeon/back.jpg" width="80px">
+</div>
+<div class="plain-card" id="tr-back">
+    <img src="/static/images/treasure/back.jpg" width="80px">
+</div>
+<hr>
+In hands:<br>
+{% for card in dg_cards %}
+<img src="{{ card['image'] }}" width="150px" class="dg-card-hand" data-id="{{ card['id'] }}">
+{% endfor %}<br>
+{% for card in tr_cards %}
+<img src="{{ card['image'] }}" width="150px">
+{% endfor %}<br>
+On table:<br>
 </body>
 </html>

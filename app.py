@@ -1,7 +1,7 @@
 from flask import Flask, render_template, url_for, request, redirect
 #from util import json_response
 
-import queries
+import queries, util
 
 app = Flask(__name__)
 
@@ -12,7 +12,10 @@ def index():
 
 @app.route("/game")
 def game():
-    return render_template("game.html")
+    dg_cards = queries.get_starting_dg_cards()
+    tr_cards = queries.get_starting_tr_cards()
+    gender = util.get_gender_randomly()
+    return render_template('game.html', dg_cards=dg_cards, tr_cards=tr_cards, gender=gender)
 
 if __name__ == '__main__':
     app.run(
