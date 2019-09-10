@@ -2,14 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>The Lonely Munchkin</title>
+    <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
-<div class="monsters">
-    {% for monster in monsters %}
-    <p>{{ monster['name'] }}, {{ monster['type'] }}</p>
-    {% endfor %}
-
+<h1>Welcome to The Lonely Munchkin!</h1>
+<h2>Enjoy the famous Munchkin game on your machine!<br>Only YOU can win!<br> To start the game, open the Box!</h2>
+<div class="img">
+    <a href="/game"><img src="/static/images/munchkin_box.jpg" width="350px"></a>
 </div>
+<h3><a href="https://munchkin.game/site-munchkin/assets/files/1138/munchkin_rules.pdf" target="_blank">Rules</a></h3>
 </body>
 </html>

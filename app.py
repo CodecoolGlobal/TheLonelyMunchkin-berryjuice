@@ -8,9 +8,11 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    monsters = queries.get_monsters()
+    return render_template('index.html')
 
-    return render_template('index.html', monsters=monsters)
+@app.route("/game")
+def game():
+    return render_template("game.html")
 
 if __name__ == '__main__':
     app.run(

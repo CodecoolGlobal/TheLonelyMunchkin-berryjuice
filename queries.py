@@ -2,11 +2,21 @@ import connection
 
 
 @connection.connection_handler
-def get_monsters(cursor):
+def get_dg_cards(cursor):
     cursor.execute("""
                     SELECT * FROM dungeon_cards 
                     ORDER BY id;
                    """)
-    monsters = cursor.fetchall()
+    cards = cursor.fetchall()
 
-    return monsters
+    return cards
+
+@connection.connection_handler
+def get_tr_cards(cursor):
+    cursor.execute("""
+                    SELECT * FROM treasure_cards 
+                    ORDER BY id;
+                   """)
+    cards = cursor.fetchall()
+
+    return cards
