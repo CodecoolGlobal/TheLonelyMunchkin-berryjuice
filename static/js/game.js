@@ -20,12 +20,6 @@ async function getData(url) {
     return data;
 };*/
 
-
-let dgCardsInHands = document.querySelectorAll(".dg-card-hand");
-let trCardsInHands = document.querySelectorAll(".tr-card-hand");
-const dgBack = document.querySelector("#dg-back");
-const trBack = document.querySelector("#tr-back");
-
 /*const drawACard = function (deck, selector, url) {
     let newCard = getData(url);
     deck.addEventListener("click", function(){
@@ -35,6 +29,15 @@ const trBack = document.querySelector("#tr-back");
 });
 
 drawACard(dgBack, "#dg-cards-in-hands", "http://0.0.0.0:8000/draw-dg-card");*/
+
+document.addEventListener('contextmenu', function(event) {
+   event.preventDefault();
+}, true);
+
+let dgCardsInHands = document.querySelectorAll(".dg-card-hand");
+let trCardsInHands = document.querySelectorAll(".tr-card-hand");
+const dgBack = document.querySelector("#dg-back");
+const trBack = document.querySelector("#tr-back");
 
 for (card of dgCardsInHands) {
 
@@ -57,7 +60,7 @@ for (card of dgCardsInHands) {
         this.classList.remove("dg-card-hand");
     });
 
-    card.addEventListener("dblclick", function(){
+    card.addEventListener("contextmenu", function(){
 
         if (this.classList.contains("on-table")) {
 
@@ -80,29 +83,33 @@ for (card of dgCardsInHands) {
 
 for (card of trCardsInHands) {
 
-    card.addEventListener("click", function(){
+    card.addEventListener("click", function() {
 
         document.querySelector("#cards-on-table").appendChild(this);
-        document.querySelector("#combat-strength").innerHTML = Number(document.querySelector("#combat-strength").innerHTML) + Number(this.dataset.bonus);
+        if (Number(this.dataset.bonus) >= 1) {
+            document.querySelector("#combat-strength").innerHTML = Number(document.querySelector("#combat-strength").innerHTML) + Number(this.dataset.bonus);
+        };
         this.classList.remove("tr-card-hand");
         this.classList.add("on-table");
     });
 
-    card.addEventListener("dblclick", function(){
+
+    card.addEventListener("auxclick", function(){
 
         if (this.classList.contains("on-table")) {
 
-            document.querySelector("#combat-strength").innerHTML = Number(document.querySelector("#combat-strength").innerHTML) - Number(this.dataset.bonus);
+            if (Number(this.dataset.bonus) >= 1) {
+                let actualCombatStrength = Number(document.querySelector("#combat-strength").innerHTML);
+                document.querySelector("#combat-strength").innerHTML = actualCombatStrength - this.dataset.bonus;
+            };
             this.remove()
         };
     });
 };
 
-console.log(document.querySelector("#dice").innerHTML);
 document.querySelector("#dice").addEventListener("click", function(){
 
     let roll = Math.floor(Math.random() * 6) + 1;
-    console.log(`This roll: ${roll}`);
     document.querySelector("#rolled-dice").innerHTML = `<img src="/static/images/dice${roll}.png" width="100px">`;
 });
 

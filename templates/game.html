@@ -42,7 +42,7 @@
 Kézben tartott kártyák:
 <p id="dg-cards-in-hands">{% for card in dg_cards %}
 <img src="{{ card['image'] }}" width="150px" class="dg-card-hand" data-id="{{ card['id'] }}" data-type="{{ card['type'] }}" data-name="{{ card['name'] }}">
-    {% endfor %}</p>
+    {% endfor %} <img src="{{ dg_cards[0]['image'] }}" width="300px" class="right-card"></p>
 <p id="tr-cards-in-hands">{% for card in tr_cards %}
 <img src="{{ card['image'] }}" width="150px" class="tr-card-hand" data-id="{{ card['id'] }}" data-type="{{ card['type'] }}" data-bonus="{{ card['basic_bonus'] }}">
     {% endfor %}</p>
