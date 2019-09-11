@@ -1,7 +1,15 @@
-from random import randint
+from functools import wraps
+from flask import jsonify
 
-def get_gender_randomly():
-    genders = ['male', 'female']
-    random = randint(0, 1)
 
-    return genders[random]
+def json_response(func):
+    """
+    Converts the returned dictionary into a JSON response
+    :param func:
+    :return:
+    """
+    @wraps(func)
+    def decorated_function(*args, **kwargs):
+        return jsonify(func(*args, **kwargs))
+
+    return decorated_function
