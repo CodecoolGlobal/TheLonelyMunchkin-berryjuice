@@ -48,14 +48,38 @@
     <h3>Kézben tartott kártyák:</h3>
 <p id="dg-cards-in-hands">{% for card in dg_cards %}
 <img src="{{ card['image'] }}" width="150px" class="dg-card-hand" data-id="{{ card['id'] }}" data-type="{{ card['type'] }}" data-name="{{ card['name'] }}">
-    {% endfor %} <img src="{{ dg_cards[0]['image'] }}" width="300px" class="plain-right-card" id="card-just-drew"></p>
+    {% endfor %}
+
+</p>
 <p id="tr-cards-in-hands">{% for card in tr_cards %}
 <img src="{{ card['image'] }}" width="150px" class="tr-card-hand" data-id="{{ card['id'] }}" data-type="{{ card['type'] }}" data-bonus="{{ card['basic_bonus'] }}">
-    {% endfor %}</p>
+    {% endfor %}
+
+</p>
 </div>
 <div>
     <h3>Kijátszott kártyák:</h3>
 <p id="cards-on-table"></p>
+</div>
+<div class="container">
+
+</div>
+<template id="dg-card-template">
+    <div>
+        <img src="" width="150px" class="dg-card-hand">
+    </div>
+</template>
+<template id="tr-card-template">
+    <div>
+        <img src="" width="150px" class="tr-card-hand">
+    </div>
+</template>
+<div id="drew-card-template-container">
+<template id="drew-card-template">
+    <div>
+        <img src="" width="300px" class="drew-card plain-right-card">
+    </div>
+</template>
 </div>
 </body>
 </html>

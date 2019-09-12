@@ -11,9 +11,9 @@ def get_gender_randomly():
 def random_dg_card():
     number_of_dg_cards = 15
     while True:
-        random_id = randint(0, number_of_dg_cards - 1)
+        random_id = randint(1, number_of_dg_cards)
         if random_id == 7:
-            random_id = randint(0, number_of_dg_cards - 1)
+            random_id = randint(1, number_of_dg_cards)
         else:
             break
 
@@ -21,6 +21,6 @@ def random_dg_card():
 
 def random_tr_card():
     number_of_dg_cards = 33
-    random_id = randint(0, number_of_dg_cards - 1)
+    random_id = randint(1, number_of_dg_cards)
 
     return random_id

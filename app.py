@@ -17,13 +17,13 @@ def game():
     gender = data_manager.get_gender_randomly()
     return render_template('game.html', dg_cards=dg_cards, tr_cards=tr_cards, gender=gender)
 
-"""@app.route("/get-cards")
-#@json_response
-def get_dg_cards():
-    dg_cards = queries.get_all_dg_cards()
-    return redirect("/game")
+@app.route("/draw-dg-card")
+@json_response
+def draw_dg_card():
+    dg_card = queries.draw_dg_card()
+    return dg_card
 
-@app.route("/get-cards")
+"""@app.route("/get-cards")
 #@json_response
 def get_tr_cards():
     tr_cards = queries.get_all_tr_cards()

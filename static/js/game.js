@@ -1,35 +1,3 @@
-/*
-let data = {};
-
-const api_get = function (url, callback) {
-        // it is not called from outside
-        // loads data from API, parses it and calls the callback with it
-
-        fetch(url, {
-            method: 'GET',
-            credentials: 'same-origin'
-        })
-            .then(response => response.json())  // parse the response as JSON
-            .then(json_response => callback(json_response));  // Call the `callback` with the returned object
-    };
-
-
-async function getData(url) {
-    const response = await fetch(url);
-    const data = await response.json();
-    return data;
-};*/
-
-/*const drawACard = function (deck, selector, url) {
-    let newCard = getData(url);
-    deck.addEventListener("click", function(){
-        //document.querySelector(selector).appendChild(newCard)
-        console.log(newCard);
-    };
-});
-
-drawACard(dgBack, "#dg-cards-in-hands", "http://0.0.0.0:8000/draw-dg-card");*/
-
 document.addEventListener('contextmenu', function(event) {
    event.preventDefault();
 }, true);
@@ -38,6 +6,22 @@ let dgCardsInHands = document.querySelectorAll(".dg-card-hand");
 let trCardsInHands = document.querySelectorAll(".tr-card-hand");
 const dgBack = document.querySelector("#dg-back");
 const trBack = document.querySelector("#tr-back");
+
+dgBack.addEventListener('click', function() {
+
+    fetch('/draw-dg-card', {
+        method: 'GET',
+        credentials: 'same-origin'
+    })
+        .then(response => response.json())  // parse the response as JSON
+        .then(json_response => {
+
+            console.log(json_response[0]);
+            const cardImage = createCard(json_response[0]['image']);
+            document.querySelector('#drew-card-template-container').appendChild(cardImage);
+        });
+
+});
 
 for (card of dgCardsInHands) {
 
@@ -114,7 +98,7 @@ for (card of trCardsInHands) {
                 let actualCombatStrength = Number(document.querySelector("#combat-strength").innerHTML);
                 document.querySelector("#combat-strength").innerHTML = actualCombatStrength - this.dataset.bonus;
             };
-            this.remove()
+            this.remove();
         };
     });
 };
@@ -122,7 +106,7 @@ for (card of trCardsInHands) {
 document.querySelector("#dice").addEventListener("click", function(){
 
     let roll = Math.floor(Math.random() * 6) + 1;
-    document.querySelector("#rolled-dice").innerHTML = `<img src="/static/images/dice${roll}.png" width="100px">`;
+    document.querySelector("#rolled-dice").innerHTML = `<img src="/static/images/dice${roll}.png" width="50px">`;
     if (roll >= 5) {
 
         console.log("Sikeres menekülés");
@@ -134,8 +118,11 @@ document.querySelector("#rolled-dice").addEventListener("click", function(){
     this.innerHTML = '';
 });
 
-let cardJustDrew = document.querySelector("#card-just-drew");
-cardJustDrew.addEventListener("click", function(){
+const createCard = function(image) {
+    const template = document.querySelector('#drew-card-template');
+    const clone = document.importNode(template.content, true);
 
-    document.querySelector("#dg-cards-in-hands").appendChild(this);
-});
+    clone.querySelector('.drew-card').setAttribute('src', image);
+
+    return clone;
+};
