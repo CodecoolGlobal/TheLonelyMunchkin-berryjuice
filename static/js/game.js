@@ -43,21 +43,33 @@ for (card of dgCardsInHands) {
 
     card.addEventListener("click", function(){
 
-        document.querySelector("#cards-on-table").appendChild(this);
-        if (this.dataset.type == "race") {
+        if (card.dataset.type == 'levelup') {
 
-            document.querySelector("#race").dataset.race = this.dataset.name;
-            document.querySelector("#race").innerHTML = this.dataset.name;
+            console.log(this.dataset.type);
+            document.querySelector("#level").innerHTML = Number(document.querySelector("#level").innerHTML) + 1;
+            this.remove();
         }
 
-        else if (this.dataset.type == "class") {
+        else {
 
-            document.querySelector("#class").dataset.class = this.dataset.name;
-            document.querySelector("#class").innerHTML = this.dataset.name;
+            document.querySelector("#cards-on-table").appendChild(this);
+
+            if (this.dataset.type == "race") {
+
+                document.querySelector("#race").dataset.race = this.dataset.name;
+                document.querySelector("#race").innerHTML = this.dataset.name;
+            }
+
+            else if (this.dataset.type == "class") {
+
+                document.querySelector("#class").dataset.class = this.dataset.name;
+                document.querySelector("#class").innerHTML = this.dataset.name;
+            };
+
+            this.classList.add("on-table");
+            this.classList.remove("dg-card-hand");
         };
 
-        this.classList.add("on-table");
-        this.classList.remove("dg-card-hand");
     });
 
     card.addEventListener("contextmenu", function(){
@@ -111,9 +123,19 @@ document.querySelector("#dice").addEventListener("click", function(){
 
     let roll = Math.floor(Math.random() * 6) + 1;
     document.querySelector("#rolled-dice").innerHTML = `<img src="/static/images/dice${roll}.png" width="100px">`;
+    if (roll >= 5) {
+
+        console.log("Sikeres menekülés");
+    };
 });
 
 document.querySelector("#rolled-dice").addEventListener("click", function(){
 
     this.innerHTML = '';
+});
+
+let cardJustDrew = document.querySelector("#card-just-drew");
+cardJustDrew.addEventListener("click", function(){
+
+    document.querySelector("#dg-cards-in-hands").appendChild(this);
 });

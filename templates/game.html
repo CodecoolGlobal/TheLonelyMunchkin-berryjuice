@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>TheLonelyMunchkin</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="/static/css/cards.css">
     <script src="/static/js/game.js" defer></script>
 </head>
 <div class="card">
     <h4>Szint</h4>
-    <p  id="level" data-level="1">1</p>
+    <p  id="level">1</p>
 </div>
 <div class="card">
     <h4>Harci erősség</h4>
@@ -27,28 +28,33 @@
     <p id="class" data-class="bumpkin">Bugris</p>
 </div>
 <div class="plain-card" id="dg-back">
-    <img src="/static/images/dungeon/back.jpg" width="80px">
+    <img src="/static/images/dungeon/back.jpg" width="100px">
 </div>
 <div class="plain-card" id="tr-back">
-    <img src="/static/images/treasure/back.jpg" width="80px">
+    <img src="/static/images/treasure/back.jpg" width="100px">
 </div>
 <div class="plain-card" id="dice">
     <img src="/static/images/dice.jpeg" width="100px">
 </div>
 <div class="plain-card" id="rolled-dice">
 </div>
+<div class="plain-card"></div>
+<div class="plain-right-card">
+    <button type="button" class="btn btn-dark" id="fight"><h1>Kardélre hánylak!</h1></button>
+    <button type="button" class="btn btn-danger" id="fight"><h1>Futááááááás!</h1></button>
+</div>
 <hr>
 <div>
-Kézben tartott kártyák:
+    <h3>Kézben tartott kártyák:</h3>
 <p id="dg-cards-in-hands">{% for card in dg_cards %}
 <img src="{{ card['image'] }}" width="150px" class="dg-card-hand" data-id="{{ card['id'] }}" data-type="{{ card['type'] }}" data-name="{{ card['name'] }}">
-    {% endfor %} <img src="{{ dg_cards[0]['image'] }}" width="300px" class="right-card"></p>
+    {% endfor %} <img src="{{ dg_cards[0]['image'] }}" width="300px" class="plain-right-card" id="card-just-drew"></p>
 <p id="tr-cards-in-hands">{% for card in tr_cards %}
 <img src="{{ card['image'] }}" width="150px" class="tr-card-hand" data-id="{{ card['id'] }}" data-type="{{ card['type'] }}" data-bonus="{{ card['basic_bonus'] }}">
     {% endfor %}</p>
 </div>
 <div>
-Kijátszott kártyák:
+    <h3>Kijátszott kártyák:</h3>
 <p id="cards-on-table"></p>
 </div>
 </body>
